@@ -1,0 +1,83 @@
+.topNav{
+    background-color: #4FD1C5;
+    color: white;  
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5em 10px;
+}
+
+.navActions{
+    display: flex;
+    justify-content: space-between;
+}
+
+.navTitle {
+    display: flex;
+    align-items: center;
+    font-size: 70%;
+    font-family: Kaushan Script;
+  }
+  
+.navTitle .logo {
+    filter: invert(100%);
+    height: 100px;
+    width: 100px;
+    margin: -10px 0px;
+}
+
+.bell-icon{
+    margin: 0px 10px;
+    margin-top: 9px;
+}
+
+h2{
+    font-size: medium;
+}
+
+.profile-menu{
+    width: fit-content;
+}
+
+.menu-button{
+    border-radius: 16px;
+    padding: 0 5px;
+}
+
+.profile-menu .menu-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none; 
+    box-shadow: none;
+}
+
+.logo:hover{
+    filter: invert(75%) sepia(100%);
+}
+
+.topNav a:hover {
+    color: #fee6bc;;
+}
+
+@media screen and (max-width: 768px) {
+    .navTitle {
+      font-size: 50%; /* Adjust the font size for smaller screens */
+    }
+  
+    .navTitle .logo {
+      width: 70px;  
+      height: 70px;
+      margin-right: 5px; 
+    }
+
+    .bell-icon{
+        margin: 8px 0px;
+    }
+
+    .topNav{
+        padding: 0.4em 0px;
+    }
+
+  }
