@@ -7,10 +7,9 @@ import { BsBorderWidth } from 'react-icons/bs';
 
 const CardItem = (props) => {
 
-    const { img_url, name, desc, cost, type, userType} = props.data;
+    const { img_url, name, desc, cost, type, demo, userType} = props.data;
     const [index, setIndex] = useState(0);
     const [isSelected, setIsSelected] = useState(false);
-
      //if the buttons should be inline based on viewport width
      const buttonsInline = useBreakpointValue({ base: false, md: true, lg: true });
 
@@ -120,6 +119,22 @@ const CardItem = (props) => {
                         <Box className="actionicon" textAlign="center" py={{base:0, md:1}}>
                             <Button colorScheme="teal" onClick={handleEditPrizeClick}><EditIcon marginRight="5px" /> Edit </Button>
                             <Button colorScheme="red" onClick={handleDeletePrizeClick}><DeleteIcon marginRight="5px"/> Delete </Button>
+                        </Box></>
+                    )}
+                    {props.userType === 'adminDemo' && demo === true && (
+                        <>
+                        <Divider borderColor="teal.500" marginTop="10px"/>
+                        <Box className="actionicon" textAlign="center" py={{base:0, md:1}}>
+                            <Button colorScheme="teal" onClick={handleEditPrizeClick}><EditIcon marginRight="5px" /> Edit </Button>
+                            <Button colorScheme="red" onClick={handleDeletePrizeClick}><DeleteIcon marginRight="5px"/> Delete </Button>
+                        </Box></>
+                    )}
+                    {props.userType === 'adminDemo' && demo === false && (
+                        <>
+                        <Divider borderColor="teal.500" marginTop="10px"/>
+                        <Box className="actionicon" textAlign="center" py={{base:0, md:1}}>
+                            <Button colorScheme="teal" isDisabled ><EditIcon marginRight="5px" /> Edit </Button>
+                            <Button colorScheme="red" isDisabled ><DeleteIcon marginRight="5px"/> Delete </Button>
                         </Box></>
                     )}
                         

@@ -10,7 +10,7 @@ const BottomNav = ({ userType }) => {
 
   
     const renderMiddleIcon = () => {
-        if (userType === "student" || userType === "admin") {
+        if (userType === "student" || userType === "admin" || userType === 'adminDemo') {
           return (
             <Link to="/merit-shop" >
               <div className="middleNavItem"> 

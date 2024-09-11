@@ -234,7 +234,7 @@ const renderPage = (
               <AutocompleteSearchBar searchType="prize" onSelectItem={handleSelectItem} onSearch={handleSearch}></AutocompleteSearchBar>
           </div>
 
-          {userType === "admin" && (
+          {userType === "admin" || userType === "adminDemo" && (
             <div style={{textAlign: "right", marginBottom: "10px", marginRight: "20px"}} >
               <Button colorScheme="teal" onClick={handleAddPrizeClick} padding="7px" pt="0px" pb="0px" >Add Item</Button>
             </div>
@@ -248,7 +248,7 @@ const renderPage = (
                 <ItemDetailModal isOpen={itemDetailModalOpen[index]} onClose={() =>handleCloseItemDetailModal(index)} prizeData={data} userType={userType} handleDelete={() => handleDeletePrizeClick(index)} handleEdit={() => handleEditPrizeClick(index)} handleRedeem={() => handleRedeemPrizeClick(index)}/>
 
                 {/*Action Modals*/}
-                <EditPrizeModal isOpen={isEditPrizeModalOpen[index]} prizeData={data} onClose={() => handleCloseEditPrizeModal(index) } mode="edit-prize"/>
+                <EditPrizeModal isOpen={isEditPrizeModalOpen[index]} prizeData={data} onClose={() => handleCloseEditPrizeModal(index) } mode="edit-prize" userType={userType}/>
                 <ConfirmDeleteModal isOpen={isConfirmDeleteModalOpen[index]} prizeName={data.name} onClose={() => handleCancelDelete(index)} onConfirm={() => handleConfirmDelete(index)}/>
                 <ConfirmRedemptionModal isOpen={isConfirmRedemptionModalOpen[index]} prizeName={data.name} cost={data.cost} onClose={() => handleCancelRedeem(index)} onConfirm={() => handleConfirmRedeem(index)}></ConfirmRedemptionModal>
                 <SuccessModal isOpen={isDeletedModalOpen[index]} onClose={() => handleCloseDeletedModal(index)} name={ data.name }  mode="delete-prize"></SuccessModal>
@@ -258,7 +258,7 @@ const renderPage = (
           </Flex>
 
           {/* AddprizeModal */}
-          <EditPrizeModal isOpen={isAddPrizeModalOpen} prizeData={null} onClose={() => setAddPrizeModalOpen(false)} mode="add-prize" onAddPrize={fetchPrizes}/>
+          <EditPrizeModal isOpen={isAddPrizeModalOpen} prizeData={null} onClose={() => setAddPrizeModalOpen(false)} mode="add-prize" onAddPrize={fetchPrizes} userType={userType}/>
           </Box>
          </Box>
   </>
@@ -366,12 +366,17 @@ const ItemDetailModal = ({ isOpen, onClose, prizeData, userType, handleEdit, han
           <Box textAlign="center"> 
               {userType === "student" && <Button colorScheme="teal" onClick={handleRedeem} >Redeem Prize</Button>}
               {userType === "staff" && <Button colorScheme="teal" onClick={onClose}>Close</Button>}
-              {userType === "admin" && (
+              {userType === "admin" || (userType === "adminDemo" && prizeData.demo) && (
                 <>
                   <Button colorScheme="teal" onClick={handleEdit}>Edit</Button>
                   <Button colorScheme="red" onClick={handleDelete}>Delete</Button>
                 </>
-              )}
+              )} { userType === "adminDemo" && !prizeData.demo && (
+                // Disable buttons if user is adminDemo but itemDemo=false
+                <>
+                  <Button colorScheme="teal" onClick={handleEdit} isDisabled={userType === "adminDemo"}>Edit</Button>
+                  <Button colorScheme="red" onClick={handleDelete} isDisabled={userType === "adminDemo"}>Delete</Button>
+                </>)}
             </Box>
         </ModalFooter>
       </ModalContent>

@@ -66,8 +66,8 @@ const CoursePage = ({ userType }) => {
   const fetchCourses = async () => {
     let fetchedCourses = [];
     try {
-        if (userType === "admin") {
-            const response = await get_all_courses();
+        if (userType === "admin" || userType === "adminDemo") {
+            const response = await get_all_courses(); 
             if (response.status === 200 && Array.isArray(response.body)) {
                 setCourses(response.body);
             } else {
@@ -155,7 +155,7 @@ const fetchAllStaff = async () => {
   const handleCourseClick = (course) => {
     if(userType === "student" || userType==="staff"){
       navigate(`/course-students/${course.id}`, { state: { data: course } });}
-    else if(userType === "admin"){
+    else if(userType === "admin" || userType === "adminDemo"){
       navigate(`/admin/course/${course.id}`, { state: { data: course } });
     }
   };
@@ -257,10 +257,10 @@ const fetchAllStaff = async () => {
   return (
     <Box mt={3} margin="auto" width={{base: "100%", md: "90%"}}  minHeight={{ base: "calc(100vh - 136px)", md: "calc(100vh - 166px)" }} backgroundColor="white">
       <Box width="90%" mx="auto" maxWidth="1000px">
-        <Text mb={2} className='page-title'>{userType === "admin" ? "All Courses" : "My Courses"}</Text>
+        <Text mb={2} className='page-title'>{userType === "admin" || userType === "adminDemo" ? "All Courses" : "My Courses"}</Text>
         <SearchBar searchType="course" onSearch={handleSearch} userID={currentUser ? currentUser.id : null} userType={userType}/>
         <Flex justifyContent="end"  mt={2}>
-        {userType === "admin" && (
+        {userType === "admin" || userType === "adminDemo" && (
           <Button onClick={() => setSelectedCourse(null) || onEditModalOpen()} colorScheme="teal" mb={4}>
             Add New Course
           </Button>
@@ -311,8 +311,8 @@ const fetchAllStaff = async () => {
                 cursor: "pointer"    
             }}
               bgGradient='white'
-              width={userType === 'admin' ? "280px" : "250px"}
-              height={userType === 'admin' ? "fit-content" : "180px"}
+              width={userType === 'admin' || userType === "adminDemo" ? "280px" : "250px"}
+              height={userType === 'admin' || userType === "adminDemo" ? "fit-content" : "180px"}
               mb={3} mx={2} pt={2}
               display="flex"
               flexDirection="column"
@@ -322,26 +322,33 @@ const fetchAllStaff = async () => {
 
                 <Flex flexDirection="column" width="95%" height="100%" mx="auto"> 
                 {course.img_url ? (
-                      <Box height={userType === 'admin' ? "60px" : "60%"} width="100%" borderRadius="10px" bgImage={course.img_url}
+                      <Box height={userType === 'admin' || userType === "adminDemo" ? "60px" : "60%"} width="100%" borderRadius="10px" bgImage={course.img_url}
                       backgroundPosition="center" backgroundSize="cover" />
                   ) : (
                       <Box 
-                          height={userType === 'admin' ? "60px" : "50%"}
+                          height={userType === 'admin' || userType === "adminDemo" ? "60px" : "50%"}
                           width="100%"
                           bgColor={generateRandomColor()} // Apply random color
                           borderRadius="10px" 
                           pointerEvents="none"
                       />
                   )}
-                  <Box flexGrow={1} ml={2} py={3} cursor="pointer" height={userType === 'admin' ? "30%" : "40%"} m="auto" alignItems="center">
+                  <Box flexGrow={1} ml={2} py={3} cursor="pointer" height={userType === 'admin' || userType === "adminDemo" ? "30%" : "40%"} m="auto" alignItems="center">
                       <Text fontSize="md" fontWeight="bold" noOfLines={2}>{course.name}</Text>
                       <Text fontSize="sm" noOfLines={1}>{course.code} ({course.period})</Text>  
                   </Box>
-                  {userType === "admin" && (
+                  {userType === "admin" || (userType === "adminDemo" && course.demo) && (
                       <Flex flexDirection="row" width="100%" height="30%" bottom="0">
                           <Button colorScheme="teal" onClick={(e) => {e.stopPropagation(); handleEditCourse(course);}}>Edit</Button>
                           <Button colorScheme="teal" onClick={(e) => {e.stopPropagation(); handleEnrollClick(course);}}>Enroll</Button>
                           <Button colorScheme="red" onClick={(e) => {e.stopPropagation(); handleDeleteCourse(course);}}>Delete</Button>
+                      </Flex>
+                  )}
+                  {(userType === "adminDemo" && !course.demo) && (
+                      <Flex flexDirection="row" width="100%" height="30%" bottom="0">
+                          <Button colorScheme="teal" onClick={(e) => {e.stopPropagation(); handleEditCourse(course);}} isDisabled>Edit</Button>
+                          <Button colorScheme="teal" onClick={(e) => {e.stopPropagation(); handleEnrollClick(course);}} >Enroll</Button>
+                          <Button colorScheme="red" onClick={(e) => {e.stopPropagation(); handleDeleteCourse(course);}} isDisabled>Delete</Button>
                       </Flex>
                   )}
                 </Flex>
@@ -351,9 +358,9 @@ const fetchAllStaff = async () => {
         )}
       </Flex>
       <DeleteModal isOpen={isDeleteModalOpen} onClose={onDeleteModalClose} courseName={selectedCourse?.name} onConfirm={handleConfirmDeleteCourse} />
-      <EditCourseModal isOpen={isEditModalOpen} onClose={onEditModalClose} courseData={selectedCourse} onCourseUpdated={fetchCourses} />
+      <EditCourseModal isOpen={isEditModalOpen} onClose={onEditModalClose} courseData={selectedCourse} onCourseUpdated={fetchCourses} userType={userType}/>
       <CourseSuccessModal isOpen={isSuccessModalOpen} onClose={onSuccessModalClose} name={selectedCourse?.name} mode="delete-course" /> {/* Use the success modal for delete confirmations */}
-      <EnrollModal
+      <EnrollModal 
         isOpen={isEnrollModalOpen}
         onClose={() => setIsEnrollModalOpen(false)}
         selectedCourse={selectedCourseForEnroll} allStudents={allStudents} handleEnrollStudentToCourse={handleEnrollStudentToCourse} />

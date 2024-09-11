@@ -70,7 +70,7 @@ const AutocompleteSearchBar = ({ searchType, onSelectItem, onSearch, courseID, u
     const fetchCourses = async (searchTerm) => {
       try{
         let result;
-        if (userID && userType !== "admin") {
+        if (userID && userType !== "admin" && userType !== "adminDemo") {
           // Fetch courses for the specific user
           result = await get_user_courses(userID)
           if(result.status === 200) {
@@ -135,7 +135,7 @@ const AutocompleteSearchBar = ({ searchType, onSelectItem, onSearch, courseID, u
       }
       
     } else if (searchType === 'course') {
-      if (userID && userType !== "admin") {
+      if (userID && userType !== "admin" && userType !== "adminDemo") {
         await fetchCourses(newSearchTerm); 
         filteredResults = allCourses.filter(result => { 
           return ( 

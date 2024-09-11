@@ -11,6 +11,7 @@ export default class Prize {
         type = '',
         desc = '',
         img_url = '',
+        demo = '',
     ){
         this.id = '';
         this.name = name;
@@ -18,6 +19,7 @@ export default class Prize {
         this.type = type;
         this.desc = desc;
         this.img_url = img_url;
+        this.demo = demo
         this.timestamp = Timestamp.now();
         this.available = true;
     }
@@ -25,7 +27,7 @@ export default class Prize {
     //HELPER FUNCTIONS
     //creates a doc of a prize in firebase
     //returns true on success, false otherwise
-    async create ( name, cost, type, desc, img_url) {
+    async create ( name, cost, type, desc, img_url, demo) {
         try {
             const prize_collection_ref = collection ( db, 'prizes' );
 
@@ -68,11 +70,11 @@ export default class Prize {
     //SERVICES
     //POST prize
     //creates a prize and returns true on success, false otherwise
-    static async POST_prize  ( name, cost, type, desc, img_url ) {
+    static async POST_prize  ( name, cost, type, desc, img_url, demo ) {
 
         try{
             await runTransaction ( db, async ( transaction ) => {
-                const prize = new Prize ( name, cost, type, desc, img_url );
+                const prize = new Prize ( name, cost, type, desc, img_url, demo );
 
                 const success = await prize.create();
 
@@ -98,7 +100,8 @@ export default class Prize {
         cost = null,
         type = null,
         desc = null,
-        img_url = null ) {
+        img_url = null, 
+        demo = null ) {
 
         try{
             await runTransaction ( db, async ( transaction ) => {
@@ -122,7 +125,7 @@ export default class Prize {
                 if ( type ) fields_to_update.type = type;
                 if ( desc ) fields_to_update.desc = desc;
                 if ( img_url ) fields_to_update.img_url = img_url;
-
+                if ( demo ) fields_to_update.demo = demo;
                 transaction.update ( doc_ref, fields_to_update );
             });
 

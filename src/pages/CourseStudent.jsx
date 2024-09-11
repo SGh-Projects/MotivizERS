@@ -213,13 +213,13 @@ const CourseStudent = ({userType}) => {
     return (
       <Box display='flex' flexDirection='column' height='100%' width={{base: "100%", md: "90%"}} marginX='auto' backgroundColor="white" minHeight={{ base: "calc(100vh - 136px)", md: "calc(100vh - 166px)" }}>
 
-        {userType !== "admin" && (
+        {userType !== "admin" || userType !== "adminDemo" && (
           <>
             {renderPage}
           </>
         )}  
 
-        {userType === "admin" && (
+        {userType === "admin" || userType === "adminDemo" && (
           <Tabs isFitted variant="enclosed" defaultIndex={1}  backgroundColor="white" >
             
             <TabList>
@@ -308,7 +308,7 @@ const CourseStudent = ({userType}) => {
   
     // action buttons
     const actionButtons = () => { 
-      if (userType === 'staff' || userType === "admin"){ 
+      if (userType === 'staff' || userType === "admin" || userType === "adminDemo"){ 
           return(
               <Box className="actionicon" textAlign="right" >
                   <Button colorScheme="teal" marginRight="5px" onClick={(event) => handleAssignPointsClick(studentData.studentid, event)}>
@@ -385,7 +385,7 @@ const CourseStudent = ({userType}) => {
               </Box>
             )}
 
-            {userType === 'admin' && (
+            {userType === 'admin' || userType === "adminDemo" && (
               <Box>
                 <Text fontWeight="bold" textAlign="center">Recent Activity</Text>
                 {/* Add recent activity content here */}

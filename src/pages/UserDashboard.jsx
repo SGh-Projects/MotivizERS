@@ -158,8 +158,9 @@ export default function UserDashboard({userType}) {
       navigate(`/course-page/${item.id}`, { state: { data: item } })
     }
   };
+  const isAdmin = userType === 'admin';
 
-  if (userType === 'admin') {
+  if (userType === 'admin' || userType === 'adminDemo') {
     return (
       <Box width={{base: "100%", md: "90%"}} backgroundColor="white" mx="auto" height="100%" minHeight={{ base: "calc(100vh - 136px)", md: "calc(100vh - 166px)" }}>
         <Text className="page-title" textAlign="center">Admin Tools</Text>
@@ -185,10 +186,10 @@ export default function UserDashboard({userType}) {
             <Button colorScheme="teal" onClick={handleAddCourseClick} >Add Course</Button> {/*Function to be added */}
             <AddCourseModal isOpen={onCourseUpdated} courseData={null} onClose={() => setAddCourseOpen(false)} mode="add-course" />
             
-            <Button colorScheme="teal" onClick={handleAddCoursesCsvClick} >Add via CSV</Button> {/*Function to be added */}
+            <Button colorScheme="teal" onClick={handleAddCoursesCsvClick} isDisabled={!isAdmin}>Add via CSV</Button> {/*Function to be added */}
             <AddCourseCsvModal isOpen={addCoursesCsvOpen} onClose={() => setCoursesCsvOpen(false)}></AddCourseCsvModal>
 
-            <Button colorScheme="teal" onClick={handleEnrollCsvClick} >Enroll via CSV</Button> {/*Function to be added */}
+            <Button colorScheme="teal" onClick={handleEnrollCsvClick} isDisabled={!isAdmin}>Enroll via CSV</Button> {/*Function to be added */}
             <EnrollCsvModal isOpen={enrollCsvOpen} onClose={() => setEnrollCsvOpen(false)}></EnrollCsvModal>
 
           </Flex>
@@ -206,16 +207,16 @@ export default function UserDashboard({userType}) {
         <Text fontWeight="bold" fontSize="lg" mt="20px" textAlign="center">A New User</Text>
         <Box marginTop="20px" textAlign="center" border="2px solid teal" py="20px" borderRadius="15px" maxWidth="90%" width={{base: "90%", md:"50%"}} m="auto" boxShadow="0 4px 6px rgba(0, 0, 0, 0.1)" bg="teal.50">
         <Flex direction="row" justifyContent="center" mx="auto" align="center" mt="5">
-          <Button colorScheme="teal" mb="4" onClick={handleAddStudentClick}>Add Student</Button>
+          <Button colorScheme="teal" mb="4" onClick={handleAddStudentClick} isDisabled={!isAdmin}>Add Student</Button>
           <AddStudentModal isOpen={addStudentOpen} onClose={() => setAddStudentOpen(false)} />
 
-          <Button colorScheme="teal" mb="4" onClick={handleAddStaffClick}>Add Staff</Button>
+          <Button colorScheme="teal" mb="4" onClick={handleAddStaffClick} isDisabled={!isAdmin}>Add Staff</Button>
           <AddStaffModal isOpen={addStaffOpen} onClose={() => setAddStaffOpen(false)} />
 
-          <Button colorScheme="teal" mb="4" onClick={handleAddAdminClick}>Add Admin</Button>
+          <Button colorScheme="teal" mb="4" onClick={handleAddAdminClick} isDisabled={!isAdmin}>Add Admin</Button>
           <AddAdminModal isOpen={addAdminOpen} onClose={() => setAddAdminOpen(false)} />
 
-          <Button colorScheme="teal" mb="4" onClick={handleAddUserCsvClick}>Add via CSV</Button>
+          <Button colorScheme="teal" mb="4" onClick={handleAddUserCsvClick} isDisabled={!isAdmin}>Add via CSV</Button>
           <AddUserCsvModal isOpen={addUsersCsvOpen} onClose={() => setUsersCsvOpen(false)}></AddUserCsvModal>
         </Flex>
       </Box>

@@ -161,7 +161,7 @@ const AdminCourseDetails = ({ userType }) => {
 
   return (
     <Box display='flex' flexDirection='column' height='100%' width='90%' marginX='auto' backgroundColor="white" minHeight={{ base: "calc(100vh - 136px)", md: "calc(100vh - 166px)" }}>
-      {userType === "admin" && (
+      {userType === "admin" || userType === "adminDemo"  && (
         <>
           <Tabs isFitted variant="enclosed" defaultIndex={0}>
             <TabList>

@@ -4,7 +4,7 @@ import { MinusIcon, AddIcon } from "@chakra-ui/icons";
 import SuccessModal from "./SuccessModal";
 import { create_prize, edit_prize } from "../controllers/Prize"
 
-const EditPrizeModal = ({ isOpen, onClose, prizeData, mode, onAddPrize }) => {
+const EditPrizeModal = ({ isOpen, onClose, prizeData, mode, onAddPrize, userType }) => {
     // State variables
     const [title, setTitle] = useState('Add New Prize');
     const [prizeName, setPrizeName] = useState('');
@@ -43,8 +43,14 @@ const EditPrizeModal = ({ isOpen, onClose, prizeData, mode, onAddPrize }) => {
                 handleEditConfirmation();
             } else if (mode === 'add-prize') {
                 // Handle add prize mode
-                
-                const success = create_prize(prizeName, pointsCost, 'tangible', description, imgUrl);
+                let success;
+
+                if(userType === 'adminDemo'){
+                    success = create_prize(prizeName, pointsCost, 'tangible', description, imgUrl, true);
+                }
+                else{
+                    success = create_prize(prizeName, pointsCost, 'tangible', description, imgUrl, false);
+                }
                 if (success) {
                     console.log('Prize created successfully');
 
@@ -95,7 +101,6 @@ const EditPrizeModal = ({ isOpen, onClose, prizeData, mode, onAddPrize }) => {
     };
 
     const handleConfirmEdit = () => {
-        // logic to edit the prize data on db, placeholder for now
         try{
             setPrizeName(prizeName);
             prizeData.name= prizeName;

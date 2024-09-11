@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import CourseSuccessModal from "./CourseSuccessModal"; // Ensure this is implemented correctly in your project
 import { create_course, edit_course } from '../controllers/Course';
 
-const EditCourseModal = ({ isOpen, onClose, courseData, onCourseUpdated }) => {
+const EditCourseModal = ({ isOpen, onClose, courseData, onCourseUpdated, userType }) => {
   const [code, setCode] = useState('');
   const [name, setName] = useState('');
   const [desc, setDesc] = useState('');
@@ -74,9 +74,13 @@ const EditCourseModal = ({ isOpen, onClose, courseData, onCourseUpdated }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const newCourseData = { code, name, desc, year, semester, img_url: imgUrl };
+      let newCourseData;
+      if(userType === 'adminDemo'){
+        newCourseData = { code, name, desc, year, semester, img_url: imgUrl, demo: true};
+      }else{
+        newCourseData = { code, name, desc, year, semester, img_url: imgUrl, demo: false };
+      }
       if (courseData && courseData.id) {
-        console.log(courseData)
         await edit_course(courseData.id, newCourseData);
       } else {
         await create_course(newCourseData);
@@ -125,7 +129,7 @@ const EditCourseModal = ({ isOpen, onClose, courseData, onCourseUpdated }) => {
                     {academicYears.map((year) => (
                       <option key={year} value={year}>
                         {year}
-                      </option>
+                      </option> 
                     ))}
                   </Select>
                 </FormControl>

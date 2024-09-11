@@ -21,7 +21,7 @@ const AdminCourse = ({ userType }) => {
   };
 
   useEffect(() => {
-    if (userType === "admin") {
+    if (userType === "admin" || userType === 'adminDemo') {
       setTitle("All Courses");
     } else {
       setTitle("My Courses");
@@ -70,7 +70,7 @@ const AdminCourse = ({ userType }) => {
                 <Text fontSize="xl" fontWeight="bold">{course.name}</Text>
                 <Text mt={1}>{course.description}</Text>
               </Box>
-              {userType === "admin" && (
+              {userType === "admin" || userType === "adminDemo"  && (
                 <>
                   <Button colorScheme="blue" onClick={(e) => handleEditCourse(course.id, e)}>Edit</Button>
                   <Button colorScheme="red" onClick={(e) => handleDeleteConfirmation(course, e)}>Delete</Button>

@@ -4,10 +4,10 @@ import { get_student_by_id } from './Student';
 import RedeemLog from '../models/RedeemLog';
 import Prize from '../models/Prize';
 
-export const create_prize = async (name, cost, type, desc, imgUrl) => {
+export const create_prize = async (name, cost, type, desc, imgUrl, demo) => {
     try {
         // Call the model function to create a new prize
-        const success = await Prize.POST_prize(name, cost, type, desc, imgUrl);
+        const success = await Prize.POST_prize(name, cost, type, desc, imgUrl, demo);
         return success;
     } catch (error) {
         console.error('Error creating prize:', error);
@@ -45,10 +45,10 @@ export const get_all_available_prizes = async () => {
     return filteredPrizes;
 }
 
-export const edit_prize = async (id, name, cost, type, desc, img_url) => {
+export const edit_prize = async (id, name, cost, type, desc, img_url, demo) => {
     try {
         // Call the model function to update prizes
-        const success = await Prize.UPDATE_prize(id, name, cost, type, desc, img_url)
+        const success = await Prize.UPDATE_prize(id, name, cost, type, desc, img_url, demo)
         return success;
     } catch (error) {
         console.error('Error retrieving all prizes:', error);

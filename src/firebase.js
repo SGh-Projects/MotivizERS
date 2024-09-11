@@ -4,13 +4,13 @@ import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyD99CJlncT7I-NvKdEpy_NpomZ3dF31wVc",
-  authDomain: "student-incentive-8215m.firebaseapp.com",
-  projectId: "student-incentive-8215m",
-  storageBucket: "student-incentive-8215m.appspot.com",
-  messagingSenderId: "404956497165",
-  appId: "1:404956497165:web:e0ad13290b5518ffa29c44",
-  measurementId: "G-N3JZ9DFQM6"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: "student-incentive-demo.firebaseapp.com",
+  projectId: "student-incentive-demo",
+  storageBucket: "student-incentive-demo.appspot.com",
+  messagingSenderId: "635037364757",
+  appId: "1:635037364757:web:45e3dedeb2c459799f541c",
+  measurementId: "G-Y9LB8JZH58"
 };
 
 // Initialize Firebase
