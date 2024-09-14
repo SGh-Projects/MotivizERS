@@ -43,8 +43,8 @@ export default class Admin extends User {
     }
 
 
-    //if a user has staff role
-    //returns true if user role is staff false otherwise
+    //if a user has admin role
+    //returns true if user role is admin false otherwise
     static async is_admin ( id ) {
         try {
             //create user doc ref

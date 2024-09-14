@@ -1,4 +1,4 @@
-import { Box, Spacer, Text, Divider, Button, Flex, FormControl, FormLabel, Select, Avatar } from "@chakra-ui/react";
+import { Box, Spacer, Text, Divider, Button, Flex, FormControl, FormLabel, Select, Avatar, useToast } from "@chakra-ui/react";
 import { Link, useNavigate} from "react-router-dom";
 import { useState, useEffect } from "react";
 import { IoIosArrowForward } from 'react-icons/io';
@@ -36,6 +36,7 @@ export default function UserDashboard({userType}) {
   const [addAdminOpen, setAddAdminOpen] = useState(false);
   //add user by csv
   const [addUsersCsvOpen, setUsersCsvOpen] = useState(false);
+  const toast= useToast()
 
   //add course by csv
   const [addCoursesCsvOpen, setCoursesCsvOpen] = useState(false);
@@ -116,6 +117,9 @@ export default function UserDashboard({userType}) {
     setEnrollCsvOpen(true);
   }
   
+  const handleOnAddPrize = () => {
+    setAddPrizeOpen(false)
+  }
   
 
   const fetchCourses = async () => {
@@ -184,7 +188,7 @@ export default function UserDashboard({userType}) {
           <Flex direction="row" mx="auto" justifyContent="center" align="center" mt="5">
             <Button colorScheme="teal" onClick={handleManageCourseClick}>Go to Courses <IoIosArrowForward/></Button>
             <Button colorScheme="teal" onClick={handleAddCourseClick} >Add Course</Button> {/*Function to be added */}
-            <AddCourseModal isOpen={onCourseUpdated} courseData={null} onClose={() => setAddCourseOpen(false)} mode="add-course" />
+            <AddCourseModal isOpen={onCourseUpdated} courseData={null} onClose={() => setAddCourseOpen(false)} mode="add-course" userType={userType}/>
             
             <Button colorScheme="teal" onClick={handleAddCoursesCsvClick} isDisabled={!isAdmin}>Add via CSV</Button> {/*Function to be added */}
             <AddCourseCsvModal isOpen={addCoursesCsvOpen} onClose={() => setCoursesCsvOpen(false)}></AddCourseCsvModal>
@@ -201,7 +205,7 @@ export default function UserDashboard({userType}) {
         <Box marginTop="20px" textAlign="center" border="2px solid teal" py="20px" borderRadius="15px" maxWidth="90%" width={{base: "90%", md:"50%"}} m="auto" boxShadow="0 4px 6px rgba(0, 0, 0, 0.1)" bg="teal.50">
           <Button colorScheme="teal" onClick={handleManageShopClick}>Go to Merit Shop <IoIosArrowForward/></Button>
           <Button colorScheme="teal" onClick={handleAddPrizeClick}>Add Prize</Button>
-          <AddPrizeModal isOpen={AddPrizeOpen} prizeData={null} onClose={() => setAddPrizeOpen(false)} mode="add-prize" />
+          <AddPrizeModal isOpen={AddPrizeOpen} prizeData={null} onClose={() => setAddPrizeOpen(false)} mode="add-prize" onAddPrize={handleOnAddPrize} userType={userType}/>
         </Box>
 
         <Text fontWeight="bold" fontSize="lg" mt="20px" textAlign="center">A New User</Text>

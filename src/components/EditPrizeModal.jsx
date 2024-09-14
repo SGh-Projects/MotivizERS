@@ -47,13 +47,14 @@ const EditPrizeModal = ({ isOpen, onClose, prizeData, mode, onAddPrize, userType
 
                 if(userType === 'adminDemo'){
                     success = create_prize(prizeName, pointsCost, 'tangible', description, imgUrl, true);
+                    console.log("tsadsa") 
                 }
                 else{
-                    success = create_prize(prizeName, pointsCost, 'tangible', description, imgUrl, false);
+                    if(userType === 'admin'){
+                        success = create_prize(prizeName, pointsCost, 'tangible', description, imgUrl, false);
+                    }
                 }
                 if (success) {
-                    console.log('Prize created successfully');
-
                     onAddPrize();
                     onClose();
 

@@ -2,10 +2,14 @@ import * as preset from './preset';
 import { Box, Text, Image, Avatar, Flex, Button, useBreakpointValue, Divider, Tooltip } from '@chakra-ui/react';
 import { IoIosArrowForward } from 'react-icons/io';
 import { useNavigate } from 'react-router-dom';
+import { get_student_by_id } from '../controllers/Student';
+import { useEffect, useState } from 'react';
 
 const CardRank = (props) => {
     const { rank, img_url, first_name, last_name, id, accumulated_pts } = props.data;
-   
+    const [student, setStudent]= useState(null)
+    const navigate= useNavigate();
+
     //alternating bg colors
     const bgColor = rank % 2 === 0 ? '#FFF7E9' : 'white';
 
@@ -17,6 +21,7 @@ const CardRank = (props) => {
         borderRadius: '50px',
         boxShadow: '0 1px 2px 3px #f7d086',
         w: "100%",
+        cursor: "pointer",
         transition: 'transform 0.3s',
         _hover: {
             transform: 'scale(1.03)',
@@ -100,8 +105,13 @@ const CardRank = (props) => {
         }
     };
 
+    const handleRankClick = async (studentid) => { 
+        const studentData= await get_student_by_id(studentid);
+        navigate(`/profile-page/${studentid}`, { state: { data: studentData.body } });
+      };
+
     return (
-        <Flex sx={styleCard} align="center">
+        <Flex sx={styleCard} align="center" onClick={() => handleRankClick(id)}>
             {
                 (rank === 1 || rank===2 || rank===3) && (
                     <Box ml={3}>

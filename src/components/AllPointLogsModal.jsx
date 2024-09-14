@@ -12,6 +12,8 @@ const AllPointLogsModal = ({ isOpen, onClose, staffID, studentID }) => {
 
   const fetchLogs = async () => {
     try {
+      let logsWithNames;
+      if(staffID){
       let response; 
       response = await get_staff_assign_points_logs(staffID)  
       const logs= response.body;
@@ -26,7 +28,7 @@ const AllPointLogsModal = ({ isOpen, onClose, staffID, studentID }) => {
               filteredLogs = logs;
             }
             // Iterate through the logs array
-            const logsWithNames = await Promise.all(
+            logsWithNames = await Promise.all(
                 filteredLogs.map(async (log) => {
                 // Fetch staff data
                 const staffData = await get_staff_by_id(log.staff_id);
@@ -49,14 +51,52 @@ const AllPointLogsModal = ({ isOpen, onClose, staffID, studentID }) => {
             logsWithNames.sort((a, b) => b.timestamp - a.timestamp);
 
             // Update state with logs containing staff and student names
-            setLogs(logsWithNames);
-          }
+            setLogs(logsWithNames);}
+        }
           else{
             setLogs([]);
           }
       } else {
-        
-        console.log('No Logs found.', response );
+        if(studentID && !staffID){
+          
+          const response= await get_student_awarded_points_logs(studentID);
+          const logs= response.body;
+        if (logs && Array.isArray(logs)) { 
+          if((logs.length) > 0){ 
+            
+            // Iterate through the logs array
+            logsWithNames = await Promise.all(
+                logs.map(async (log) => {
+                // Fetch staff data
+                const staffData = await get_staff_by_id(log.staff_id);
+                // Fetch student data
+                const studentData = await get_student_by_id(log.student_id);
+
+                // Combine first name and last name for staff and student names
+                const staffName = `${staffData.body.first_name} ${staffData.body.last_name}`;
+                const studentName = `${studentData.first_name} ${studentData.last_name}`;
+
+                // Add staff and student names to the log object
+                return {
+                  ...log,
+                  staffName,
+                  studentName,
+                };
+              })
+            );
+            // Sort logs by timestamp
+            logsWithNames.sort((a, b) => b.timestamp - a.timestamp);
+
+            // Update state with logs containing staff and student names
+            setLogs(logsWithNames);}
+        }
+          else{
+            setLogs([]);
+          }
+        }
+        else{
+          console.log('No Logs found.', response );
+        }
       }
     } catch (error) {
       // Handle error
@@ -65,10 +105,10 @@ const AllPointLogsModal = ({ isOpen, onClose, staffID, studentID }) => {
   };
 
   useEffect(() => {
-    if (isOpen && staffID) {
+    if (isOpen && (staffID || studentID)) {
       fetchLogs();
     }
-  }, [staffID, isOpen]);
+  }, [staffID, studentID, isOpen]);
  
 
   const groupLogsByDate = (logs) => {
