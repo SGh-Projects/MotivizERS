@@ -9,7 +9,7 @@ These accounts may be used for testing the system. There are 3 different types o
 Note that administrative functions are limited on the demo accounts.
 
 ### Admin
-- email: admin@demo.ccom
+- email: admin@demo.com
 - pw: password
 
 ### Staff

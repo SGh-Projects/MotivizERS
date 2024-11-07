@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton,
   Button, useToast, Select, VStack
@@ -14,6 +15,7 @@ const EnrollModal = ({ isOpen, onClose, selectedCourse }) => {
     const [selectedStaffId, setSelectedStaffId] = useState("");
     const [students, setStudents] = useState([]);
     const [staff, setStaff] = useState([]);
+    const navigate= useNavigate();
 
     // Define fetchStudents and fetchStaff here so they are accessible to handleEnroll
     const fetchStudents = async () => {
@@ -56,6 +58,7 @@ const EnrollModal = ({ isOpen, onClose, selectedCourse }) => {
                     isClosable: true,
                 });
                 onClose();  // This closes the modal
+                navigate(0);
                 await fetchStudents();  // Update the list of students
                 await fetchStaff();     // Update the list of staff
                 await get_course_lecturer(selectedCourse.id)

@@ -213,8 +213,8 @@ const CourseStudent = ({userType}) => {
     return (
       <Box display='flex' flexDirection='column' height='100%' width={{base: "100%", md: "90%"}} marginX='auto' backgroundColor="white" minHeight={{ base: "calc(100vh - 136px)", md: "calc(100vh - 166px)" }}>
 
-        {userType !== "admin" || userType !== "adminDemo" && (
-          <>
+        {(userType !== "admin" && userType !== "adminDemo") && (
+          <> 
             {renderPage}
           </>
         )}  

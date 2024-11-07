@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Box, Menu, MenuButton, MenuList, MenuItem, MenuDivider, Avatar, useBreakpointValue, useToast } from "@chakra-ui/react";
+import { Box, Menu, MenuButton, MenuList, MenuItem, MenuDivider, Avatar, useBreakpointValue, useToast, Flex} from "@chakra-ui/react";
 import { BellIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import './css/TopNav.css';
 import { logout } from "../controllers/Auth";
@@ -104,7 +104,12 @@ function TopNav() {
                             <h2>{subtitle}</h2>
                         </>
                     ) : (
-                        <h1>MotivizERS</h1>
+                        <Flex flexDirection="column" style={{textAlign: "left"}}><h1>MotivizERS Demo</h1>
+                        <h2 style={{backgroundColor: "darkred", padding: "5px", fontFamily: "Calibri", fontWeight: "bold"}}>
+                            Note that this is a demo therefore some functions will be unavailable for use. See the Github readme file for login credentials.
+
+                        </h2>
+                        </Flex>
                     )}
                 </div>
             </div>
@@ -134,7 +139,7 @@ function TopNav() {
                             <MenuItem border="none" width="95%" _hover={{ bg: 'teal.400', color: 'white', border: "none" }} onClick={handleLogout}>Log Out</MenuItem>
                         </MenuList>
                     </Menu>
-                </div>
+                    </div>
             )}
         </nav>
     );

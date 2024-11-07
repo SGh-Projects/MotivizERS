@@ -166,7 +166,7 @@ export default function UserDashboard({userType}) {
 
   if (userType === 'admin' || userType === 'adminDemo') {
     return (
-      <Box width={{base: "100%", md: "90%"}} backgroundColor="white" mx="auto" height="100%" minHeight={{ base: "calc(100vh - 136px)", md: "calc(100vh - 166px)" }}>
+      <Box width={{base: "100%", md: "90%" }} backgroundColor="white" mx="auto" height="100%" minHeight={{ base: "calc(100vh - 136px)", md: "calc(100vh - 166px)" }}>
         <Text className="page-title" textAlign="center">Admin Tools</Text>
         <Flex my="2" width="90%" mx="auto" justifyContent="center">
           <Box  width="60%" textAlign="right" justifyContent="right" >
