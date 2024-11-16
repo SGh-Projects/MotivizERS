@@ -293,8 +293,13 @@ export default class Prize {
     
                 let description = `Student ${user_data.first_name} ${user_data.last_name} (Student ID: ${user_data.id}) redeemed ${prize_data.name} for ${prize_data.cost} points.`;
                 
-               // Send notification to all admin users
-                const adminsSnapshot = await getDocs(query(collection(db, 'users'), where('role', '==', 'admin')));
+               // Send notification to all admin/admin demo users
+               const adminsSnapshot = await getDocs(
+                    query(
+                    collection(db, 'users'),
+                    where('role', 'in', ['admin', 'adminDemo'])
+                    )
+                );
                  
                 adminsSnapshot.forEach(adminDoc => {
                     const adminId = adminDoc.id;

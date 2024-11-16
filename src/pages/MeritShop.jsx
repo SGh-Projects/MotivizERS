@@ -228,18 +228,20 @@ const renderPage = (
   <>
     <Box margin="auto" w="90%" h="fit-content"  backgroundColor="white" align="center" minHeight={{ base: "calc(100vh - 136px)", md: "calc(100vh - 166px)" }} >
       <Box align="center">
-          <div className="page-title">Available Prizes</div>
+        {userType === "adminDemo" &&(
+              <div style={{backgroundColor: "#AC2121", color: "white", fontWeight: "bold"}}>To prevent the removal of essential data for demonstration, please note that the admin demo account can only edit and delete prizes that it has specifically added.</div>
+            )}
 
+          <div className="page-title">Available Prizes</div>
           <div style={{marginBottom: "10px", width:"80%", mx:"auto"}}>
               <AutocompleteSearchBar searchType="prize" onSelectItem={handleSelectItem} onSearch={handleSearch}></AutocompleteSearchBar>
           </div>
 
-          {userType === "admin" || userType === "adminDemo" && (
+          {(userType === "admin" || userType === "adminDemo") && (
             <div style={{textAlign: "right", marginBottom: "10px", marginRight: "20px"}} >
               <Button colorScheme="teal" onClick={handleAddPrizeClick} padding="7px" pt="0px" pb="0px" >Add Item</Button>
             </div>
           )}
-
           <Flex flexDirection="row" justifyContent="space-around" flexWrap="wrap" w="100%" px={5} >
             {displayedPrizes.map((data, index) => (
               <Box key={index} mx={2} >
@@ -366,12 +368,12 @@ const ItemDetailModal = ({ isOpen, onClose, prizeData, userType, handleEdit, han
           <Box textAlign="center"> 
               {userType === "student" && <Button colorScheme="teal" onClick={handleRedeem} >Redeem Prize</Button>}
               {userType === "staff" && <Button colorScheme="teal" onClick={onClose}>Close</Button>}
-              {userType === "admin" || (userType === "adminDemo" && prizeData.demo) && (
+              {(userType === "admin" || (userType === "adminDemo" && prizeData.demo)) && (
                 <>
                   <Button colorScheme="teal" onClick={handleEdit}>Edit</Button>
                   <Button colorScheme="red" onClick={handleDelete}>Delete</Button>
                 </>
-              )} { userType === "adminDemo" && !prizeData.demo && (
+              )} { (userType === "adminDemo" && !prizeData.demo) && (
                 // Disable buttons if user is adminDemo but itemDemo=false
                 <>
                   <Button colorScheme="teal" onClick={handleEdit} isDisabled={userType === "adminDemo"}>Edit</Button>

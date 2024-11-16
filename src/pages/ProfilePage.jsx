@@ -143,7 +143,7 @@ const ProfilePage = ({ userType }) => {
               <Avatar name={`${profile.first_name} ${profile.last_name}`} src={profile.img_url} size="xl" mb="4" marginRight= "3"/>
             <Box align="left">
             <Heading as="h3" size="lg" mb="2">{profile.first_name} {profile.last_name} </Heading>
-            {(profile.role === "student" || userType === "admin") && (<Text fontWeight="bold">{profile.id}</Text>)}
+            {(profile.role === "student" || userType === "admin" || userType === "adminDemo") && (<Text fontWeight="bold">{profile.id}</Text>)}
             <Text fontWeight="bold">{profile.email}</Text>
             </Box></Flex>
             {isEditing ? (

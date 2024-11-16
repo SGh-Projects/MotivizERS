@@ -58,7 +58,6 @@ const EnrollModal = ({ isOpen, onClose, selectedCourse }) => {
                     isClosable: true,
                 });
                 onClose();  // This closes the modal
-                navigate(0);
                 await fetchStudents();  // Update the list of students
                 await fetchStaff();     // Update the list of staff
                 await get_course_lecturer(selectedCourse.id)

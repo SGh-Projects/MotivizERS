@@ -257,6 +257,9 @@ const fetchAllStaff = async () => {
   return (
     <Box mt={3} margin="auto" width={{base: "100%", md: "90%"}}  minHeight={{ base: "calc(100vh - 136px)", md: "calc(100vh - 166px)" }} backgroundColor="white">
       <Box width="90%" mx="auto" maxWidth="1000px">
+      {userType === "adminDemo" &&(
+              <div style={{backgroundColor: "#AC2121", color: "white", fontWeight: "bold"}}>To prevent the removal of essential data for demonstration, please note that the admin demo account can only edit and delete courses that it has specifically added.</div>
+            )}
         <Text mb={2} className='page-title'>{userType === "admin" || userType === "adminDemo" ? "All Courses" : "My Courses"}</Text>
         <SearchBar searchType="course" onSearch={handleSearch} userID={currentUser ? currentUser.id : null} userType={userType}/>
         <Flex justifyContent="end"  mt={2}>
@@ -311,8 +314,8 @@ const fetchAllStaff = async () => {
                 cursor: "pointer"    
             }}
               bgGradient='white'
-              width={userType === 'admin' || userType === "adminDemo" ? "280px" : "250px"}
-              height={userType === 'admin' || userType === "adminDemo" ? "fit-content" : "180px"}
+              width={(userType === 'admin' || userType === "adminDemo") ? "280px" : "250px"}
+              height={(userType === 'admin' || userType === "adminDemo") ? "fit-content" : "180px"}
               mb={3} mx={2} pt={2}
               display="flex"
               flexDirection="column"
@@ -322,22 +325,22 @@ const fetchAllStaff = async () => {
 
                 <Flex flexDirection="column" width="95%" height="100%" mx="auto"> 
                 {course.img_url ? (
-                      <Box height={userType === 'admin' || userType === "adminDemo" ? "60px" : "60%"} width="100%" borderRadius="10px" bgImage={course.img_url}
+                      <Box height={(userType === 'admin' || userType === "adminDemo") ? "60px" : "60%"} width="100%" borderRadius="10px" bgImage={course.img_url}
                       backgroundPosition="center" backgroundSize="cover" />
                   ) : (
                       <Box 
-                          height={userType === 'admin' || userType === "adminDemo" ? "60px" : "50%"}
+                          height={(userType === 'admin' || userType === "adminDemo") ? "60px" : "50%"}
                           width="100%"
                           bgColor={generateRandomColor()} // Apply random color
                           borderRadius="10px" 
                           pointerEvents="none"
                       />
                   )}
-                  <Box flexGrow={1} ml={2} py={3} cursor="pointer" height={userType === 'admin' || userType === "adminDemo" ? "30%" : "40%"} m="auto" alignItems="center">
+                  <Box flexGrow={1} ml={2} py={3} cursor="pointer" height={(userType === 'admin' || userType === "adminDemo") ? "30%" : "40%"} m="auto" alignItems="center">
                       <Text fontSize="md" fontWeight="bold" noOfLines={2}>{course.name}</Text>
                       <Text fontSize="sm" noOfLines={1}>{course.code} ({course.period})</Text>  
                   </Box>
-                  {userType === "admin" || (userType === "adminDemo" && course.demo) && (
+                  {(userType === "admin" || (userType === "adminDemo") && course.demo) && (
                       <Flex flexDirection="row" width="100%" height="30%" bottom="0">
                           <Button colorScheme="teal" onClick={(e) => {e.stopPropagation(); handleEditCourse(course);}}>Edit</Button>
                           <Button colorScheme="teal" onClick={(e) => {e.stopPropagation(); handleEnrollClick(course);}}>Enroll</Button>

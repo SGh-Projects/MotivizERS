@@ -104,11 +104,8 @@ function TopNav() {
                             <h2>{subtitle}</h2>
                         </>
                     ) : (
-                        <Flex flexDirection="column" style={{textAlign: "left"}}><h1>MotivizERS Demo</h1>
-                        <h2 style={{backgroundColor: "darkred", padding: "5px", fontFamily: "Calibri", fontWeight: "bold"}}>
-                            Note that this is a demo therefore some functions will be unavailable for use. See the Github readme file for login credentials.
-
-                        </h2>
+                        <Flex flexDirection="column" style={{textAlign: "left", justifyContent: "space-between"}}>
+                        <h1>MotivizERS Demo</h1>
                         </Flex>
                     )}
                 </div>

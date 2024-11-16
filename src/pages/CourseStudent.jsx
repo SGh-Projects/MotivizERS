@@ -219,9 +219,8 @@ const CourseStudent = ({userType}) => {
           </>
         )}  
 
-        {userType === "admin" || userType === "adminDemo" && (
+        {(userType === "admin" || userType === "adminDemo") && (
           <Tabs isFitted variant="enclosed" defaultIndex={1}  backgroundColor="white" >
-            
             <TabList>
                 <Tab onClick={goToLecturerTab}>Lecturer</Tab>
                 <Tab onClick={goToCourseStudentsPage}>Students</Tab> 
@@ -385,7 +384,7 @@ const CourseStudent = ({userType}) => {
               </Box>
             )}
 
-            {userType === 'admin' || userType === "adminDemo" && (
+            {(userType === 'admin' || userType === "adminDemo") && (
               <Box>
                 <Text fontWeight="bold" textAlign="center">Recent Activity</Text>
                 {/* Add recent activity content here */}

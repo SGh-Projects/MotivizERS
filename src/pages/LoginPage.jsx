@@ -91,8 +91,12 @@ export default function LoginPage() {
 
       {/*Login form container*/}
       <Box className="form-container" order={{ base: "2", md: "2" }} flex="1" h="fit-content" textAlign="center" w= {{ base: "100%", md: "80%"}} >
+      <h2 style={{backgroundColor: "#AC2121", padding: "5px", margin: "0", color: "white", fontFamily: "Calibri", fontWeight: "bold", width: "98%", textAlign: "center"}}>
+          Note that some functions will be unavailable for use in this demo. 
+          <br></br>See the Github readme file for login credentials.
+        </h2>
         <Text>Welcome Back! Please login.</Text>
-        <form onSubmit={handleLogin}>
+        <form onSubmit={handleLogin} style={{width: "99%"}}>
           <FormControl isRequired>
             <FormLabel htmlFor="email">Email: </FormLabel>
             <Input type="email" id="email" placeholder="Enter your email" name='email' onChange={handleChange}/>
