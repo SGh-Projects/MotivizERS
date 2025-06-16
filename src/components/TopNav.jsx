@@ -105,7 +105,7 @@ function TopNav() {
                         </>
                     ) : (
                         <Flex flexDirection="column" style={{textAlign: "left", justifyContent: "space-between"}}>
-                        <h1>MotivizERS Demo</h1>
+                        <h1>MotivizERS</h1>
                         </Flex>
                     )}
                 </div>

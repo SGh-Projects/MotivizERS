@@ -4,7 +4,7 @@ import { MinusIcon, AddIcon } from "@chakra-ui/icons";
 import SuccessModal from "./SuccessModal";
 import { create_prize, edit_prize } from "../controllers/Prize"
 
-const EditPrizeModal = ({ isOpen, onClose, prizeData, mode, onAddPrize, userType }) => {
+const EditPrizeModal = ({ isOpen, onClose, prizeData, mode, onAddPrize, onEditPrize, userType }) => {
     // State variables
     const [title, setTitle] = useState('Add New Prize');
     const [prizeName, setPrizeName] = useState('');
@@ -101,29 +101,29 @@ const EditPrizeModal = ({ isOpen, onClose, prizeData, mode, onAddPrize, userType
         setIsConfirmModalOpen(true);
     };
 
-    const handleConfirmEdit = () => {
+    const handleConfirmEdit = async () => {
         try{
             setPrizeName(prizeName);
             prizeData.name= prizeName;
             prizeData.desc= description;
             prizeData.imgUrl = imgUrl;
             prizeData.point_cost=pointsCost;
-            setIsConfirmModalOpen(true);
 
-            const success = edit_prize(prizeData.id, prizeName, pointsCost, "Tangible", description, imgUrl);
+            const success = await edit_prize(prizeData.id, prizeName, pointsCost, "Tangible", description, imgUrl);
                 if (success) {
                     console.log('Prize Edited successfully');
                     setIsConfirmModalOpen(false);
                     setIsSuccessModalOpen(true);
+                    onEditPrize();
                 } else {
                     console.error('Error editing prize');
                     // Handle error or show error message to the user
                 }
-            onClose(); // Close the modal 
         }catch (error) {
             console.error("Error occurred during form submission:", error); 
-        } 
-        onClose(); // Close the main modal
+        } finally {
+            onClose();  // close modal
+        }
     };
 
     const handleCancelEdit = () => {

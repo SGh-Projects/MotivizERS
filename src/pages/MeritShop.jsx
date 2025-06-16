@@ -250,7 +250,7 @@ const renderPage = (
                 <ItemDetailModal isOpen={itemDetailModalOpen[index]} onClose={() =>handleCloseItemDetailModal(index)} prizeData={data} userType={userType} handleDelete={() => handleDeletePrizeClick(index)} handleEdit={() => handleEditPrizeClick(index)} handleRedeem={() => handleRedeemPrizeClick(index)}/>
 
                 {/*Action Modals*/}
-                <EditPrizeModal isOpen={isEditPrizeModalOpen[index]} prizeData={data} onClose={() => handleCloseEditPrizeModal(index) } mode="edit-prize" userType={userType}/>
+                <EditPrizeModal isOpen={isEditPrizeModalOpen[index]} prizeData={data} onClose={() => handleCloseEditPrizeModal(index) } mode="edit-prize" userType={userType} onEditPrize={fetchPrizes}/>
                 <ConfirmDeleteModal isOpen={isConfirmDeleteModalOpen[index]} prizeName={data.name} onClose={() => handleCancelDelete(index)} onConfirm={() => handleConfirmDelete(index)}/>
                 <ConfirmRedemptionModal isOpen={isConfirmRedemptionModalOpen[index]} prizeName={data.name} cost={data.cost} onClose={() => handleCancelRedeem(index)} onConfirm={() => handleConfirmRedeem(index)}></ConfirmRedemptionModal>
                 <SuccessModal isOpen={isDeletedModalOpen[index]} onClose={() => handleCloseDeletedModal(index)} name={ data.name }  mode="delete-prize"></SuccessModal>
