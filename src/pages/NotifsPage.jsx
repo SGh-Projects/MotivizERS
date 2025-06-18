@@ -146,7 +146,7 @@ const NotifsPage = ({ userType }) => {
               <Text w="100%" fontSize="lg" mb={4} whiteSpace="pre-wrap">
                 {selectedNotification.notifDesc}
               </Text>
-              {(userType !== "admin" || userType !== "adminDemo") && (
+              {(userType !== "admin" && userType !== "adminDemo") && (
                 <Text>Current Points: {user.current_pts}</Text>
                 )}
               <Divider />
