@@ -1,12 +1,12 @@
 # Motivizers: Student Incentive System -demo
 
 ## Demo
-To test this system currently, simply run the code via github codespaces, enter "npm run dev" and login via the demo accounts provided below. 
-(live deployed link to be added)
+- https://motivizers02.netlify.app/
+- To test this system currently, simply visit the link above and login via any of the demo accounts listed below.
 
 ## Demo Accounts
 These accounts may be used for testing the system. There are 3 different types of users admin, staff and students. Below are some alternative options for logging in.
-Note that administrative functions are limited on the demo accounts.
+-Note that administrative functions are limited on the admin demo accounts to preserve system integrity and prevent critical changes.
 
 ### Admin
 - email: admin@demo.com
