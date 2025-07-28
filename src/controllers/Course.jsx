@@ -120,11 +120,10 @@ export const get_course_top_earner = async (courseID) => {
 
         // Sort the course students by accumulated points in descending order
         courseStudents.body.sort((a, b) => {
-            const ptsA = parseFloat(a.accumulatedPts);
-            const ptsB = parseFloat(b.accumulatedPts);
+           const ptsA = parseFloat(a.accumulated_pts);
+            const ptsB = parseFloat(b.accumulated_pts);
             return ptsB - ptsA;
         });
-
         // Return the top student 
         return courseStudents.body[0];
     } catch (error) {

@@ -185,29 +185,39 @@ export default class Staff extends User{
                 }
             }
 
-            for ( const id of courseIDs ) { 
-                try{ 
-                    let course = await get_course_by_id(id);
-                    let topEarner = await get_course_top_earner(id);
-                    let rank = await get_student_rank(topEarner.id);
-                    
-                    // Attach the course ID to the top earner object
-                    topEarner.course_code = course.body.code;
-                    topEarner.course_name = course.body.name;
-                    topEarner.course_id = id;
-                    topEarner.rank = rank;
-                    students.push(topEarner);
-                }
-                catch(error){
-                    console.error(`Error fetching top earner for course ${id} :`, error);
-                }
-            } 
-            
-            response.body = unionize_objects ( students );
+             // Run all course processing in parallel for faster output
+        const coursePromises = courseIDs.map(async (courseID) => {
+            try {
+                const [course, topEarner] = await Promise.all([
+                    get_course_by_id(courseID),
+                    get_course_top_earner(courseID)
+                ]);
 
-            return response;
+                if (!topEarner) return null;
 
-        } catch ( error ) {
+                const rank = await get_student_rank(topEarner.id);
+
+                 // Attach the course details to the top earner object
+                return {
+                    ...topEarner,
+                    course_code: course.body.code,
+                    course_name: course.body.name,
+                    course_id: courseID,
+                    rank: rank
+                };
+            } catch (error) {
+                console.error(`Error processing course ${courseID}:`, error);
+                return null;
+            }
+        });
+
+        const results = await Promise.all(coursePromises);
+        students = results.filter(result => result !== null); //filter null results
+
+        response.body = unionize_objects(students);
+
+        return response;
+    } catch ( error ) {
             console.error('error retrieving all top earners: ', error);
             return ( { status: 500 , body: 'Server unable to retrieve top earners' } );
         }
