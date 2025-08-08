@@ -25,7 +25,8 @@ a:hover {
 
 body {
   place-items: center;
-  width: 100vw;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .main-content{

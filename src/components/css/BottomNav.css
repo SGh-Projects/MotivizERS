@@ -2,7 +2,8 @@
     position: fixed;
     bottom: 0;
     left: 0;
-    width: 100%;
+    width: 100vw;
+    overflow: hidden;
     background-color: #4FD1C5;
     color: white;  
     display: flex;

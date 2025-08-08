@@ -20,7 +20,7 @@ const CardItem = (props) => {
         backgroundColor: 'white',
         borderRadius: preset.lengthM1,
         cursor: 'pointer',
-        width: "280px",
+        width: {base:"260px", md: "280px"},
         height: "fit-content",
         transition: 'transform 0.3s',
         _hover: {

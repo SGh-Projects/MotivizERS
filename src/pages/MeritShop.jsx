@@ -242,7 +242,7 @@ const renderPage = (
               <Button colorScheme="teal" onClick={handleAddPrizeClick} padding="7px" pt="0px" pb="0px" >Add Item</Button>
             </div>
           )}
-          <Flex flexDirection="row" justifyContent="space-around" flexWrap="wrap" w="100%" px={5} >
+          <Flex flexDirection="row" justifyContent="space-around" flexWrap="wrap" w="100%" px= {{base: "0", md: "3", }}  >
             {displayedPrizes.map((data, index) => (
               <Box key={index} mx={2} >
                 <CardItem data={ data } userType={ userType } handleOpenItemDetailModal={() => handleOpenItemDetailModal(index)} handleEditPrizeClick={() => handleEditPrizeClick(index)} handleDeletePrizeClick={() => handleDeletePrizeClick(index)} handleRedeemPrizeClick={() =>handleRedeemPrizeClick(index)}></CardItem>

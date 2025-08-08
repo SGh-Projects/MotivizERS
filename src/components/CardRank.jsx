@@ -17,7 +17,10 @@ const CardRank = (props) => {
     const styleCard = {
         boxRadius: preset.lengthM3,
         backgroundColor: `${bgColor}`,
-        padding: preset.lengthS3,
+        padding: {
+            base: preset.lengthS1, // smaller padding for mobile
+            md: preset.lengthS3,   // original padding for md+
+        },
         borderRadius: '50px',
         boxShadow: '0 1px 2px 3px #f7d086',
         w: "100%",
@@ -47,15 +50,22 @@ const CardRank = (props) => {
     };
 
     const styleRank = {
-        fontSize: preset.lengthL1,
-        marginRight: preset.lengthS3,
+        fontSize: {
+            base: preset.lengthM2,  
+            md: preset.lengthL1,   
+        },
+        marginRight: {
+            base: preset.lengthS2,
+            md: preset.lengthS3,
+        },
         marginLeft: preset.lengthS3,
         color: preset.colorFontMain,
-        fontWeight: 'bold'
-    }
+        fontWeight: 'bold',
+        };
 
     const styleImage = {
-        width: preset.lengthL2,
+        width: {base:"45px", md :preset.lengthL2},
+        height: {base:"45px", md :preset.lengthL2},
         borderRadius: preset.lengthS3,
         marginRight: preset.lengthS3
     };
@@ -81,7 +91,10 @@ const CardRank = (props) => {
     const stylePtCount = {
         fontWeight: 'bold',
         color: preset.colorFontLabel,
-        fontSize: preset.lengthM2,
+        fontSize: {
+            base: preset.lengthM1,  
+            md: preset.lengthM2,   
+        },
         pading: 0
     };
     
@@ -90,7 +103,9 @@ const CardRank = (props) => {
     };
 
     const styleArrow = {
-        fontSize: preset.lengthL2,
+        fontSize: {
+            base: preset.lengthM3,  
+            md: preset.lengthL2,},
         color: preset.colorFontMain
     };
 
@@ -114,7 +129,7 @@ const CardRank = (props) => {
         <Flex sx={styleCard} align="center" onClick={() => handleRankClick(id)}>
             {
                 (rank === 1 || rank===2 || rank===3) && (
-                    <Box ml={3}>
+                    <Box  ml={{base: 2, md: 3}}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill={getRankIconColor(rank)} className="bi bi-award-fill" viewBox="0 0 16 16">
                         <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
                         <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
@@ -190,8 +205,14 @@ const TopEarnerCard = (props) =>{
     };
 
     const styleRank = {
-        fontSize: preset.lengthL1,
-        marginRight: preset.lengthS3,
+        fontSize: {
+            base: preset.lengthM3,  
+            md: preset.lengthL1,   
+        },
+        marginRight: {
+            base: preset.lengthS2,
+            md: preset.lengthS3,
+        },
         marginLeft: preset.lengthS3,
         color: preset.colorFontMain,
         fontWeight: 'bold'
@@ -221,7 +242,7 @@ const TopEarnerCard = (props) =>{
         fontWeight: 'bold',
         color: preset.colorFontMain,
         fontSize: preset.lengthM1,
-        pading: 0
+        padding: 0,
     };
     
     const stylePtCourse = {
@@ -261,7 +282,7 @@ const TopEarnerCard = (props) =>{
                 <Text sx={styleText}>{id}</Text>
             </Box>
 
-            <Box my="1" mr="5" textAlign="right">
+            <Box my="1" mr={{base:"1", md:"5"}} textAlign="right">
                 <Text className="count" sx={stylePtCount} mb="3">{accumulated_pts} MP</Text>
                 <Text className="type" sx={stylePtCourse}>{course_code}</Text>
             </Box>

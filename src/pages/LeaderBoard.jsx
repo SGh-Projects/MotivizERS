@@ -57,11 +57,11 @@ export default function LeaderBoard( {userType} ) {
 
   const renderPage =(
     <>
-            <Box width="90%" align="center" backgroundColor="white" pb="3" minHeight={{ base: "calc(100vh - 136px)", md: "calc(100vh - 166px)" }}>
+            <Box width={{base: "98%", md:"90%"}} align="center" backgroundColor="white" pb="3" minHeight={{ base: "calc(100vh - 136px)", md: "calc(100vh - 166px)" }}>
               <div className="page-title">LeaderBoard</div>
-              <Box backgroundColor="orange.100" width="95%" borderRadius="lg">
+              <Box backgroundColor="orange.100" width="95%" p="1" borderRadius="lg">
                 <Box backgroundColor="teal.500" borderRadius="lg">
-                  <Flex justify="space-between" className="labels" width="98%" backgroundColor="teal.500" borderRadius="lg" textColor= 'white' mb={2} py={2}>
+                  <Flex justify="space-between" className="labels" width={{base: "98%", md: "98%"}} backgroundColor="teal.500" borderRadius="lg" textColor= 'white' mb={2} py={2}>
                     <Box flex="1" ml={4} textAlign="left" fontWeight="bold" fontSize="lg" >Rank</Box>
                     <Box flex="2" textAlign="center" fontWeight="bold" fontSize="lg">Student</Box>
                     <Box flex="1" mr={12} textAlign="right" fontWeight="bold" fontSize="lg">Points</Box>
@@ -81,9 +81,9 @@ export default function LeaderBoard( {userType} ) {
   );
 
   return (
-      <Box sx={styCont} className="merit-container" backgroundImage="linear-gradient(to bottom, #ffc561, #2fccbc)" w="100%" align="center">
+      <Box sx={styCont} className="merit-container" backgroundImage="linear-gradient(to bottom, #ffc561, #2fccbc)" width="100%"  align="center">
         {userType === "staff" && (
-        <Tabs isFitted style={tabsContainerStyle} defaultIndex={0} backgroundColor="white" w="90%">
+        <Tabs isFitted style={tabsContainerStyle} defaultIndex={0} backgroundColor="white" width={{base: "95%", md: "90%"}}>
           <TabList>
               <Link to="/leaderboard" style={{width: '50%', margin: 'auto'}}><Tab>Leaderboard</Tab></Link>
               <Link to="/merit-shop" style={{width: '50%'}}><Tab onclick={handleTabClick}>Merit Shop</Tab></Link>

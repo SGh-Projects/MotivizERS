@@ -119,7 +119,7 @@ const AssignPoints = () => {
       
       <SearchBar searchType="student" onSelectItem={handleSelectStudent} onSearch={handleSearch}/>
 
-      <Box mt={4} border="1px solid gray.300" margin="10px" width="100%">
+      <Box mt={4} border="1px solid gray.300" margin="10px" width={{base: "95%", md: "98%"}}>
         <h2 style={{ textAlign: 'center' }}>Selected Student:</h2>
         <Box border="1px solid" borderColor="gray.300" p={3} mb={1} bg="gray.100" borderRadius="md" textAlign="center">
           {selectedStudent ? (

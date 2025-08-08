@@ -242,7 +242,7 @@ export default function UserDashboard({userType}) {
           <CardStat userType={userType}></CardStat> 
         </Box>
   
-        <Box w={{base: "90%", md: "60%"}} mx="auto" flexDirection="column">
+        <Box w={{base: "100%", md: "60%"}} mx="auto" flexDirection="column">
           <Text sx={styLeaderboardText}>Top Earners</Text>
           <Text>See the top earner from each of your courses.</Text>
 
